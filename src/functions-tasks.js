@@ -32,17 +32,12 @@ function getCurrentFunctionName() {
  *   getFunctionBody(hiHello) => "function hiHello() { console.log('hello world'); }"
  *
  */
-<<<<<<< HEAD
+
 function getFunctionBody(func) {
   if (typeof func === 'function') {
     return func.toString();
   }
   return '';
-=======
-function getFunctionBody(fn) {
-  if (typeof fn !== 'function') return '';
-  return fn.toString();
->>>>>>> f8682e0576fe06e5697e22c1ad207c1b54ce04df
 }
 
 /**
@@ -60,7 +55,6 @@ function getFunctionBody(fn) {
  *
  */
 function getArgumentsCount(funcs) {
-<<<<<<< HEAD
   if (!Array.isArray(funcs) && funcs.length === 0) {
     return [0];
   }
@@ -70,9 +64,6 @@ function getArgumentsCount(funcs) {
     }
     return 0;
   });
-=======
-  return funcs.map((func) => func.length);
->>>>>>> f8682e0576fe06e5697e22c1ad207c1b54ce04df
 }
 
 /**
@@ -141,7 +132,7 @@ function getPolynom(...args) {
 function memoize(func) {
   let cache = null;
   let firstCall = false;
-  return function () {
+  return () => {
     if (!firstCall) {
       cache = func();
       firstCall = true;
@@ -166,7 +157,7 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-  return function () {
+  return () => {
     let itErr;
     for (let i = 0; i < attempts; i + 1) {
       try {
@@ -203,7 +194,7 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-  return function (...args) {
+  return (...args) => {
     const argsToString = args.map((arg) => JSON.stringify(arg)).join(',');
     logFunc(`${func.name}(${argsToString}) starts`);
     const result = func(...args);
@@ -226,7 +217,7 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn, ...args1) {
-  return function (...args2) {
+  return (...args2) => {
     return fn(...args1, ...args2);
   };
 }
@@ -250,7 +241,7 @@ function partialUsingArguments(fn, ...args1) {
  */
 function getIdGeneratorFunction(startFrom) {
   let id = startFrom;
-  return function () {
+  return () => {
     id += 1;
     return id - 1;
   };
